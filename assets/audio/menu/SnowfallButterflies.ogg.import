@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SnowfallButterflies.ogg-38c6311b6e5c458c6a5fd19d9842ec10.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/menu/SnowfallButterflies.ogg"
+dest_files=[ "res://.import/SnowfallButterflies.ogg-38c6311b6e5c458c6a5fd19d9842ec10.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
