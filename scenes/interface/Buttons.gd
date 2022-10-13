@@ -22,20 +22,15 @@ func _process(delta) -> void:
 			$QuitButton.release_focus()
 			keyboardPressed = false
 	
-func _on_Button_hover():       
-	$ButtonHover.play()      
+func _on_Button_hover():
+		$ButtonHover.play()      
 	
-func _on_StartButton_button_down():
-	$ButtonSelected.play()
-	buttonPressed = "START"
-	get_tree().get_root().set_disable_input(true)       
+func _on_StartButton_button_down():  
+	buttonPressed = "START" 
 	
 func _on_OptionButton_button_down():
-	$ButtonSelected.play()
 	buttonPressed = "OPTIONS"
-	get_tree().get_root().set_disable_input(true)       
 
 func _on_QuitButton_button_down():
-	$ButtonSelected.play()
 	buttonPressed = "QUIT"
-	get_tree().get_root().set_disable_input(true)       
+
