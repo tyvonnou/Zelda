@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/interface/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/menu/theme/menu.tres" type="Theme" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/transition/Transition.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/menu/layers/leaf.png" type="Texture" id=12]
 [ext_resource path="res://assets/audio/menu/light-switch-82388.ogg" type="AudioStream" id=13]
+[ext_resource path="res://assets/menu/layers/title.PNG" type="Texture" id=14]
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
@@ -29,6 +30,48 @@ linear_accel_random = 0.9
 radial_accel = 63.63
 radial_accel_random = 0.54
 anim_speed_random = 0.11
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec4 key_color : hint_color = vec4(0,1,0,1);
+uniform float similarity : hint_range(0.0,1.0) = 0.4;
+uniform float smoothness : hint_range(0.00,1.0) = 0.08;
+uniform float spill : hint_range(0.0,1.0) = 0.1;
+
+// From https://github.com/libretro/glsl-shaders/blob/master/nnedi3/shaders/rgb-to-yuv.glsl
+vec2 RGBtoUV(vec3 rgb) {
+  return vec2(
+    rgb.r * -0.169 + rgb.g * -0.331 + rgb.b *  0.5    + 0.5,
+    rgb.r *  0.5   + rgb.g * -0.419 + rgb.b * -0.081  + 0.5
+  );
+}
+
+vec4 ProcessChromaKey(sampler2D tex,vec2 texCoord) {
+  vec4 rgba = texture(tex, texCoord);
+  float chromaDist = distance(RGBtoUV(texture(tex, texCoord).rgb), RGBtoUV(key_color.rgb));
+
+  float baseMask = chromaDist - similarity;
+  float fullMask = pow(clamp(baseMask / smoothness, 0., 1.), 1.5);
+  rgba.a = fullMask;
+
+  float spillVal = pow(clamp(baseMask / spill, 0., 1.), 1.5);
+  float desat = clamp(rgba.r * 0.2126 + rgba.g * 0.7152 + rgba.b * 0.0722, 0., 1.);
+  rgba.rgb = mix(vec3(desat, desat, desat), rgba.rgb, spillVal);
+
+  return rgba;
+}
+
+void fragment() {
+  COLOR = ProcessChromaKey(TEXTURE, UV);
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/key_color = Color( 0, 1, 0, 1 )
+shader_param/similarity = 0.4
+shader_param/smoothness = 0.08
+shader_param/spill = 0.1
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -127,6 +170,14 @@ explosiveness = 0.49
 randomness = 0.16
 process_material = SubResource( 3 )
 texture = ExtResource( 12 )
+
+[node name="Title" type="Sprite" parent="Buttons/ParallaxBackground"]
+light_mask = 0
+material = SubResource( 5 )
+position = Vector2( 156.458, 10 )
+scale = Vector2( 0.185446, 0.182456 )
+texture = ExtResource( 14 )
+centered = false
 
 [node name="ButtonSelected" type="AudioStreamPlayer" parent="Buttons"]
 stream = ExtResource( 8 )

@@ -10,7 +10,6 @@ config_version=4
 
 [application]
 
-config/name="Spacium"
 run/main_scene="res://scenes/interface/Menu.tscn"
 config/icon="res://icon.png"
 
