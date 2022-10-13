@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Manzana Snail.png-848a3e3ab6013acddfa2afadfb07f8dd.stex"
+path="res://.import/Manzana Snail.png-8501ed8e42f66fad384a9978c8c58bbc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character/Personnage/Manzana Snail.png"
-dest_files=[ "res://.import/Manzana Snail.png-848a3e3ab6013acddfa2afadfb07f8dd.stex" ]
+source_file="res://assets/character/personnage/Manzana Snail.png"
+dest_files=[ "res://.import/Manzana Snail.png-8501ed8e42f66fad384a9978c8c58bbc.stex" ]
 
 [params]
 

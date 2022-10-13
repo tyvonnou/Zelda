@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/UI_Quirky7.ogg-e2f80bed067aa90321ff7013d646242d.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/menu/UI_Quirky7.ogg"
+dest_files=[ "res://.import/UI_Quirky7.ogg-e2f80bed067aa90321ff7013d646242d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
