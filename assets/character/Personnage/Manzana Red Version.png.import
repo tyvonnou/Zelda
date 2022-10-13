@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Manzana Red Version.png-8c9008d215869e229a98a03fa704c04f.stex"
+path="res://.import/Manzana Red Version.png-3fbbfd7be580f30c06494344f7b9b43c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character/Personnage/Manzana Red Version.png"
-dest_files=[ "res://.import/Manzana Red Version.png-8c9008d215869e229a98a03fa704c04f.stex" ]
+source_file="res://assets/character/personnage/Manzana Red Version.png"
+dest_files=[ "res://.import/Manzana Red Version.png-3fbbfd7be580f30c06494344f7b9b43c.stex" ]
 
 [params]
 

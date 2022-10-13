@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/interface/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/menu/theme/menu.tres" type="Theme" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/interface/Buttons.gd" type="Script" id=10]
 [ext_resource path="res://scenes/transition/Transition.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/menu/layers/leaf.png" type="Texture" id=12]
+[ext_resource path="res://assets/audio/menu/light-switch-82388.ogg" type="AudioStream" id=13]
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
@@ -130,6 +131,9 @@ texture = ExtResource( 12 )
 [node name="ButtonSelected" type="AudioStreamPlayer" parent="Buttons"]
 stream = ExtResource( 8 )
 
+[node name="ButtonHover" type="AudioStreamPlayer" parent="Buttons"]
+stream = ExtResource( 13 )
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
@@ -138,5 +142,11 @@ autoplay = true
 
 [connection signal="scene_change_requested" from="." to="Transition" method="transition_to"]
 [connection signal="button_down" from="Buttons/StartButton" to="Buttons" method="_on_StartButton_button_down"]
+[connection signal="focus_entered" from="Buttons/StartButton" to="Buttons" method="_on_Button_hover"]
+[connection signal="mouse_entered" from="Buttons/StartButton" to="Buttons" method="_on_Button_hover"]
 [connection signal="button_down" from="Buttons/OptionButton" to="Buttons" method="_on_OptionButton_button_down"]
+[connection signal="focus_entered" from="Buttons/OptionButton" to="Buttons" method="_on_Button_hover"]
+[connection signal="mouse_entered" from="Buttons/OptionButton" to="Buttons" method="_on_Button_hover"]
 [connection signal="button_down" from="Buttons/QuitButton" to="Buttons" method="_on_QuitButton_button_down"]
+[connection signal="focus_entered" from="Buttons/QuitButton" to="Buttons" method="_on_Button_hover"]
+[connection signal="mouse_entered" from="Buttons/QuitButton" to="Buttons" method="_on_Button_hover"]

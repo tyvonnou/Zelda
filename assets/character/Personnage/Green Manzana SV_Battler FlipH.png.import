@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Green Manzana SV_Battler FlipH.png-36374497b3d6a866984108a7199a5552.stex"
+path="res://.import/Green Manzana SV_Battler FlipH.png-738895b7cc66ec3f97d17d2fd9e99f97.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character/Personnage/Green Manzana SV_Battler FlipH.png"
-dest_files=[ "res://.import/Green Manzana SV_Battler FlipH.png-36374497b3d6a866984108a7199a5552.stex" ]
+source_file="res://assets/character/personnage/Green Manzana SV_Battler FlipH.png"
+dest_files=[ "res://.import/Green Manzana SV_Battler FlipH.png-738895b7cc66ec3f97d17d2fd9e99f97.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@ extends VBoxContainer
 
 export var keyboardPressed = false 
 export var buttonPressed = "NONE"
-
+	
 func _process(delta) -> void:
 
 	# Select when keyboard pressed
@@ -21,6 +21,9 @@ func _process(delta) -> void:
 			$OptionButton.release_focus()
 			$QuitButton.release_focus()
 			keyboardPressed = false
+	
+func _on_Button_hover():       
+	$ButtonHover.play()      
 	
 func _on_StartButton_button_down():
 	$ButtonSelected.play()
