@@ -30,8 +30,8 @@ func playAnimation(animationName: String) -> void:
 			$SwordSprite.play(animationName)
 
 func stopAnimation() -> void:
-	$SwordSprite.frame = 0
 	$SwordSprite.visible = false
+	$SwordSprite.frame = 0
 	cleanShape()
 	get_tree().get_root().set_disable_input(false)
 	$SwordSprite.stop() 

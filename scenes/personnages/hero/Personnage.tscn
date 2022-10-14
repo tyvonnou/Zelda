@@ -246,10 +246,6 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=92]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 72, 72 )
-
 [sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 216, 72, 72 )
@@ -273,6 +269,10 @@ region = Rect2( 288, 216, 72, 72 )
 [sub_resource type="AtlasTexture" id=82]
 atlas = ExtResource( 4 )
 region = Rect2( 360, 216, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 72, 72 )
 
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 4 )
@@ -320,7 +320,7 @@ region = Rect2( 360, 72, 72, 72 )
 
 [sub_resource type="SpriteFrames" id=63]
 animations = [ {
-"frames": [ SubResource( 92 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ) ],
+"frames": [ null, SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ) ],
 "loop": true,
 "name": "sword-down",
 "speed": 10.0
@@ -351,6 +351,7 @@ script = ExtResource( 9 )
 [node name="HeroSprite" type="AnimatedSprite" parent="HeroBody"]
 position = Vector2( -5, -15 )
 scale = Vector2( 2, 2 )
+z_index = 1
 frames = SubResource( 9 )
 animation = "sword-up"
 frame = 5
