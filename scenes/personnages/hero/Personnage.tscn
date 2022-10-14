@@ -232,9 +232,15 @@ animation = "sword-right"
 frame = 5
 speed_scale = 2.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordBody"]
+[node name="RightShape" type="CollisionShape2D" parent="SwordBody"]
 position = Vector2( 23.5, -8.5 )
 shape = SubResource( 65 )
+disabled = true
+
+[node name="LeftShape" type="CollisionShape2D" parent="SwordBody"]
+position = Vector2( -24, -9 )
+shape = SubResource( 65 )
+disabled = true
 
 [node name="HeroBody" type="KinematicBody2D" parent="."]
 script = ExtResource( 9 )

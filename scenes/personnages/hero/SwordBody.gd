@@ -12,6 +12,8 @@ func _process(_delta):
 	if (input_vector.length() > 0.0):
 		get_parent().look_direction = input_vector
 		$SwordSprite.flip_h = sign(get_parent().look_direction.x) == -1.0
+		$RightShape.disabled = true
+		$LeftShape.disabled = true
 	
 	# Sword action 
 	if (Input.is_action_pressed("ui_accept")):
@@ -19,7 +21,16 @@ func _process(_delta):
 			"mv-right":
 				get_tree().get_root().set_disable_input(true)       
 				$SwordSprite.play("sword-right")
+				if $SwordSprite.flip_h == true:
+					$LeftShape.disabled = false
+				else:
+					$RightShape.disabled = false
+	
 
 func _on_Sword_animation_finished():
 	$SwordSprite.stop()
+	if $SwordSprite.flip_h == true:
+		$LeftShape.disabled = true
+	else:
+		$RightShape.disabled = true
 	get_tree().get_root().set_disable_input(false)       
