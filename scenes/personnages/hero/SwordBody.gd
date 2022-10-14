@@ -1,36 +1,69 @@
 extends KinematicBody2D
 
-func _process(_delta):
+func cleanShape() -> void:
+	$RightShape.disabled = true
+	$LeftShape.disabled = true
+	$DownShape.disabled = true
+	$UpShape.disabled = true
 
+func playAnimation(animationName: String) -> void:
+	get_tree().get_root().set_disable_input(true)
+	match animationName:
+		"sword-right":
+			if $SwordSprite.flip_h:
+				$SwordSprite.position.x = -2
+				$SwordSprite.position.y = -2
+				$LeftShape.disabled = false
+			else:
+				$SwordSprite.position.x = -8
+				$SwordSprite.position.y = -2
+				$RightShape.disabled = false
+		"sword-up":
+			$SwordSprite.position.x = -2
+			$SwordSprite.position.y = 4
+			$UpShape.disabled = false
+		"sword-down":
+			$SwordSprite.position.x = -2
+			$SwordSprite.position.y = -3
+			$DownShape.disabled = false
+		_:
+			$SwordSprite.play(animationName)
+
+func stopAnimation() -> void:
+	$SwordSprite.frame = 0
+	$SwordSprite.visible = false
+	cleanShape()
+	get_tree().get_root().set_disable_input(false)
+	$SwordSprite.stop() 
+	
+func _process(_delta):
+	
+	var personnage := get_parent().get_parent()
+	
 	# Movement 
 	var input_vector := Vector2(
 		float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")),
 		float(Input.is_action_pressed("ui_down")) - float(Input.is_action_pressed("ui_up"))
 	)
 	
-	# Flip horizontal
 	if (input_vector.length() > 0.0):
-		get_parent().look_direction = input_vector
-		$SwordSprite.flip_h = sign(get_parent().look_direction.x) == -1.0
-		$RightShape.disabled = true
-		$LeftShape.disabled = true
-	
+		cleanShape()
+		$SwordSprite.flip_h = sign(personnage.look_direction.x) == -1.0
+
 	# Sword action 
 	if (Input.is_action_pressed("ui_accept")):
-		match get_parent().SPRITE_MAP[get_parent().look_direction]:
+		$SwordSprite.visible = true
+		match personnage.SPRITE_MAP[personnage.look_direction]:
 			"mv-right":
-				get_tree().get_root().set_disable_input(true)       
+				playAnimation("sword-right")
 				$SwordSprite.play("sword-right")
-				if $SwordSprite.flip_h == true:
-					$LeftShape.disabled = false
-				else:
-					$RightShape.disabled = false
+			"mv-up":
+				playAnimation("sword-up")
+				$SwordSprite.play("sword-up")
+			"mv-down":
+				playAnimation("sword-down")
+				$SwordSprite.play("sword-down")
 	
 
 func _on_Sword_animation_finished():
-	$SwordSprite.stop()
-	if $SwordSprite.flip_h == true:
-		$LeftShape.disabled = true
-	else:
-		$RightShape.disabled = true
-	get_tree().get_root().set_disable_input(false)       
+	stopAnimation()       

@@ -12,7 +12,7 @@ const SPRITE_MAP := {
 	Vector2(-1.0,1.0): "mv-bottom-right",
 }
 
-export var look_direction := Vector2.DOWN
+export var look_direction := Vector2.ZERO
 
 var speed := 170
 
@@ -23,4 +23,4 @@ func _physics_process(_delta) -> void:
 	)
 	var move_direction := input_vector.normalized()
 	var _err = $HeroBody.move_and_slide(speed * move_direction)
-	_err = $SwordBody.move_and_slide(speed * move_direction)
+	#_err = $SwordBody.move_and_slide(speed * move_direction)
