@@ -25,14 +25,18 @@ func _process(_delta: float) -> void:
 			$HeroSprite.stop()
 			$HeroSprite.frame = 0
 		
-	if (Input.is_action_pressed("ui_accept")):
+	if (Input.is_action_pressed("ui_accept") && get_parent().equipment["ui_accept"] == "sword"):
 		get_tree().get_root().set_disable_input(true)
 		match get_parent().SPRITE_MAP[get_parent().look_direction]:
 			"mv-right":
 				$HeroSprite.play("sword-right")
 			"mv-up":
 				$HeroSprite.play("sword-up")
+			"mv-up-right":
+				$HeroSprite.play("sword-up")
 			"mv-down":
+				$HeroSprite.play("sword-down")
+			"mv-bottom-right":
 				$HeroSprite.play("sword-down")
 
 func _on_Hero_animation_finished():

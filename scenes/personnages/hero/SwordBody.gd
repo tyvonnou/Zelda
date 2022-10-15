@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+	
 func cleanShape() -> void:
 	$RightShape.disabled = true
 	$LeftShape.disabled = true
@@ -7,8 +8,7 @@ func cleanShape() -> void:
 	$UpShape.disabled = true
 
 func playAnimation(animationName: String) -> void:
-	get_tree().get_root().set_disable_input(true)
-	if (!$SwordSound.playing && !$SwordSprite.playing):
+	if (!$SwordSprite.playing):
 		$SwordSound.play()
 	match animationName:
 		"sword-right":
@@ -29,7 +29,7 @@ func playAnimation(animationName: String) -> void:
 			$UpShape.disabled = false
 		"sword-down":
 			$SwordSprite.z_index = 1
-			$SwordSprite.position.x = -4
+			$SwordSprite.position.x = -8
 			$SwordSprite.position.y = -8
 			$DownShape.disabled = false
 		_:
@@ -41,11 +41,9 @@ func stopAnimation() -> void:
 	cleanShape()
 	get_tree().get_root().set_disable_input(false)
 	$SwordSprite.stop() 
-	
+
 func _process(_delta):
-	
 	var personnage := get_parent().get_parent()
-	
 	# Movement 
 	var input_vector := Vector2(
 		float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")),
@@ -57,18 +55,25 @@ func _process(_delta):
 		$SwordSprite.flip_h = sign(personnage.look_direction.x) == -1.0
 
 	# Sword action 
-	if (Input.is_action_pressed("ui_accept")):
+	if (Input.is_action_pressed("ui_accept") && personnage.equipment["ui_accept"] == "sword"):
+		get_tree().get_root().set_disable_input(true)
 		$SwordSprite.visible = true
 		match personnage.SPRITE_MAP[personnage.look_direction]:
 			"mv-right":
 				playAnimation("sword-right")
 				$SwordSprite.play("sword-right")
-			"mv-up":
+			"mv-up-right":
 				playAnimation("sword-up")
 				$SwordSprite.play("sword-up")
 			"mv-down":
 				playAnimation("sword-down")
 				$SwordSprite.play("sword-down")
+			"mv-bottom-right":
+				playAnimation("sword-down")
+				$SwordSprite.play("sword-down")
+			"mv-up":
+				playAnimation("sword-up")
+				$SwordSprite.play("sword-up")
 	
 
 func _on_Sword_animation_finished():
