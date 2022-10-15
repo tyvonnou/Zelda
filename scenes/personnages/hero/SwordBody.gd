@@ -8,23 +8,29 @@ func cleanShape() -> void:
 
 func playAnimation(animationName: String) -> void:
 	get_tree().get_root().set_disable_input(true)
+	if (!$SwordSound.playing && !$SwordSprite.playing):
+		$SwordSound.play()
 	match animationName:
 		"sword-right":
 			if $SwordSprite.flip_h:
+				$SwordSprite.z_index = 0
 				$SwordSprite.position.x = -2
 				$SwordSprite.position.y = -2
 				$LeftShape.disabled = false
 			else:
+				$SwordSprite.z_index = 0
 				$SwordSprite.position.x = -8
 				$SwordSprite.position.y = -2
 				$RightShape.disabled = false
 		"sword-up":
+			$SwordSprite.z_index = 0
 			$SwordSprite.position.x = -2
 			$SwordSprite.position.y = 4
 			$UpShape.disabled = false
 		"sword-down":
-			$SwordSprite.position.x = -2
-			$SwordSprite.position.y = -3
+			$SwordSprite.z_index = 1
+			$SwordSprite.position.x = -4
+			$SwordSprite.position.y = -8
 			$DownShape.disabled = false
 		_:
 			$SwordSprite.play(animationName)
