@@ -14,7 +14,7 @@ func _process(_delta: float) -> void:
 			$HeroSprite.flip_h = sign(get_parent().look_direction.x) == -1.0
 			if get_parent().SPRITE_MAP[input_vector].begins_with("mv-") && !Input.is_action_pressed("ui_accept"):
 				$HeroSprite.play(get_parent().SPRITE_MAP[input_vector])
-				$SwordBody.stopAnimation()
+				$SwordBody.stopAnimation($SwordBody/SwordSprite)
 	
 	# Stop movement
 	if (Input.is_action_just_released("ui_right") || 
@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 			$HeroSprite.stop()
 			$HeroSprite.frame = 0
 		
-	if (Input.is_action_pressed("ui_accept") && get_parent().equipment["ui_accept"] == "sword"):
+	if (Input.is_action_just_pressed("ui_accept") && get_parent().equipment["ui_accept"] == "sword"):
 		get_tree().get_root().set_disable_input(true)
 		match get_parent().SPRITE_MAP[get_parent().look_direction]:
 			"mv-right":

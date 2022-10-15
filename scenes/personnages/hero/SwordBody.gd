@@ -1,49 +1,59 @@
 extends KinematicBody2D
 
-	
+var swordLoading := false
+var swordLoad := false
+var personnage
+
 func cleanShape() -> void:
 	$RightShape.disabled = true
 	$LeftShape.disabled = true
 	$DownShape.disabled = true
 	$UpShape.disabled = true
 
-func playAnimation(animationName: String) -> void:
-	if (!$SwordSprite.playing):
+func playAnimation(animationName: String, sprite: AnimatedSprite) -> void:
+	if (!$SwordSprite.playing && animationName.begins_with("sword")):
 		$SwordSound.play()
+	sprite.visible = true
 	match animationName:
 		"sword-right":
-			if $SwordSprite.flip_h:
-				$SwordSprite.z_index = 0
-				$SwordSprite.position.x = -2
-				$SwordSprite.position.y = -2
+			if sprite.flip_h:
+				sprite.z_index = 0
+				sprite.position.x = -2
+				sprite.position.y = -2
 				$LeftShape.disabled = false
 			else:
-				$SwordSprite.z_index = 0
-				$SwordSprite.position.x = -8
-				$SwordSprite.position.y = -2
+				sprite.z_index = 0
+				sprite.position.x = -8
+				sprite.position.y = -2
 				$RightShape.disabled = false
 		"sword-up":
-			$SwordSprite.z_index = 0
-			$SwordSprite.position.x = -2
-			$SwordSprite.position.y = 4
+			sprite.z_index = 0
+			sprite.position.x = -2
+			sprite.position.y = 4
 			$UpShape.disabled = false
 		"sword-down":
-			$SwordSprite.z_index = 1
-			$SwordSprite.position.x = -8
-			$SwordSprite.position.y = -8
+			sprite.z_index = 1
+			sprite.position.x = -8
+			sprite.position.y = -8
 			$DownShape.disabled = false
-		_:
-			$SwordSprite.play(animationName)
+		"sword-up-load":
+			sprite.z_index = 0
+			sprite.position.x = -2
+			sprite.position.y = 4
+			$UpShape.disabled = false
+	
+	sprite.play(animationName)
 
-func stopAnimation() -> void:
-	$SwordSprite.visible = false
-	$SwordSprite.frame = 0
+func stopAnimation(sprite: AnimatedSprite) -> void:
+	sprite.visible = false
+	sprite.frame = 0
 	cleanShape()
 	get_tree().get_root().set_disable_input(false)
-	$SwordSprite.stop() 
+	sprite.stop() 
 
 func _process(_delta):
-	var personnage := get_parent().get_parent()
+	personnage = get_parent().get_parent()
+	var equippedSword = personnage.equipment["ui_accept"] == "sword"
 	# Movement 
 	var input_vector := Vector2(
 		float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")),
@@ -55,26 +65,42 @@ func _process(_delta):
 		$SwordSprite.flip_h = sign(personnage.look_direction.x) == -1.0
 
 	# Sword action 
-	if (Input.is_action_pressed("ui_accept") && personnage.equipment["ui_accept"] == "sword"):
+	if (Input.is_action_just_pressed("ui_accept") && equippedSword):
 		get_tree().get_root().set_disable_input(true)
-		$SwordSprite.visible = true
 		match personnage.SPRITE_MAP[personnage.look_direction]:
 			"mv-right":
-				playAnimation("sword-right")
-				$SwordSprite.play("sword-right")
-			"mv-up-right":
-				playAnimation("sword-up")
-				$SwordSprite.play("sword-up")
-			"mv-down":
-				playAnimation("sword-down")
-				$SwordSprite.play("sword-down")
-			"mv-bottom-right":
-				playAnimation("sword-down")
-				$SwordSprite.play("sword-down")
-			"mv-up":
-				playAnimation("sword-up")
-				$SwordSprite.play("sword-up")
+				playAnimation("sword-right", $SwordSprite)
+			"mv-up", "mv-up-right":
+				playAnimation("sword-up", $SwordSprite)
+			"mv-down", "mv-bottom-right":
+				playAnimation("sword-down", $SwordSprite)
 	
+	# Stop attack
+	if Input.is_action_just_released("ui_accept") && equippedSword:
+		swordLoading = false
+		swordLoad = false
+		stopAnimation($SwordSprite)
+		stopAnimation($StarSprite)
 
+
+	
 func _on_Sword_animation_finished():
-	stopAnimation()       
+	if Input.is_action_pressed("ui_accept") && !swordLoading && !swordLoad:
+		swordLoading = true
+		match personnage.SPRITE_MAP[personnage.look_direction]:
+			"mv-up-right", "mv-up":
+				playAnimation("sword-up-load", $SwordSprite)
+				playAnimation("star-up-loading", $StarSprite)
+			_:
+				stopAnimation($SwordSprite) 
+	elif !(swordLoading || swordLoad):
+			stopAnimation($SwordSprite)       
+
+func _on_Star_animation_finished():
+	if Input.is_action_pressed("ui_accept") && swordLoading:
+		swordLoading = false
+		swordLoad = true
+		match personnage.SPRITE_MAP[personnage.look_direction]:
+			"mv-up-right", "mv-up":
+				playAnimation("star-up-load", $StarSprite)     
+
