@@ -28,7 +28,7 @@ func _ready():
 		equipment["ui_accept"] = "sword"
 
 export var look_direction := Vector2.ZERO
-
+export var swordLoad := false
 var speed := 170
 
 func _physics_process(_delta) -> void:

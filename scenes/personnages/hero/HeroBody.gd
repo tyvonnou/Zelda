@@ -1,7 +1,11 @@
 extends KinematicBody2D
 
+var personnage
+
 func _process(_delta: float) -> void:
 	
+	personnage = get_parent()
+	var equippedSword = personnage.equipment["ui_accept"] == "sword"
 	# Movement 
 	var input_vector := Vector2(
 		float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")),
@@ -9,9 +13,9 @@ func _process(_delta: float) -> void:
 	)
 
 	# Play movements and update look direction
-	if (input_vector.length() > 0.0):
-			get_parent().look_direction = input_vector
-			$HeroSprite.flip_h = sign(get_parent().look_direction.x) == -1.0
+	if (input_vector.length() > 0.0 &&  !$SwordBody/StarSprite.playing):
+			personnage.look_direction = input_vector
+			$HeroSprite.flip_h = sign(personnage.look_direction.x) == -1.0
 			if get_parent().SPRITE_MAP[input_vector].begins_with("mv-") && !Input.is_action_pressed("ui_accept"):
 				$HeroSprite.play(get_parent().SPRITE_MAP[input_vector])
 				$SwordBody.stopAnimation($SwordBody/SwordSprite)
@@ -25,9 +29,9 @@ func _process(_delta: float) -> void:
 			$HeroSprite.stop()
 			$HeroSprite.frame = 0
 		
-	if (Input.is_action_just_pressed("ui_accept") && get_parent().equipment["ui_accept"] == "sword"):
+	if (Input.is_action_just_pressed("ui_accept") && equippedSword):
 		get_tree().get_root().set_disable_input(true)
-		match get_parent().SPRITE_MAP[get_parent().look_direction]:
+		match personnage.SPRITE_MAP[personnage.look_direction]:
 			"mv-right":
 				$HeroSprite.play("sword-right")
 			"mv-up":
@@ -39,7 +43,16 @@ func _process(_delta: float) -> void:
 			"mv-bottom-right":
 				$HeroSprite.play("sword-down")
 
+	if Input.is_action_just_released("ui_accept") && personnage.swordLoad:
+			$HeroSprite.play("sword-up-release")
+		
 func _on_Hero_animation_finished():
-	get_tree().get_root().set_disable_input(false)
-	$HeroSprite.stop()
-	$HeroSprite.frame = 0
+	if Input.is_action_pressed("ui_accept"):
+		match $SwordBody/SwordSprite.get_animation():
+			"sword-up":
+				$HeroSprite.play("load-sword-up")     
+
+	else:
+		get_tree().get_root().set_disable_input(false)
+		$HeroSprite.stop()
+		$HeroSprite.frame = 0
