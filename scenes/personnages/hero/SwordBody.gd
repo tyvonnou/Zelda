@@ -51,6 +51,8 @@ func _process(_delta):
 		if personnage.swordLoad:
 			$SwordSprite.playAnimation("sword-up-release")
 			personnage.swordLoad = false
+		else:
+			stopAnimation($SwordSprite)
 		stopAnimation($StarSprite)
 
 		
@@ -58,7 +60,18 @@ func _on_Sword_animation_finished():
 	if Input.is_action_pressed("ui_accept"):
 		match $SwordSprite.get_animation():
 			"sword-up":
-				$SwordSprite.playAnimation("load-sword-up")
+				$SwordSprite.flip_h = true 
+				$SwordSprite.flip_v = false 
+				$SwordSprite.playAnimation("sword-up-release")
+				$SwordSprite.stop()
+				$SwordSprite.frame = 0
+				$StarSprite.playAnimation("star-up-loading")
+			"sword-down":
+				$SwordSprite.flip_h = true 
+				$SwordSprite.flip_v = true 
+				$SwordSprite.playAnimation("sword-up-release")
+				$SwordSprite.stop()
+				$SwordSprite.frame = 0
 				$StarSprite.playAnimation("star-up-loading")
 			_:
 				if !$SwordSprite.get_animation().begins_with("load"):
@@ -69,7 +82,7 @@ func _on_Sword_animation_finished():
 func _on_Star_animation_finished():
 	if Input.is_action_pressed("ui_accept"):
 		match $SwordSprite.get_animation():
-			"load-sword-up":
+			"sword-up-release":
 				personnage.swordLoad = true
 				$StarSprite.playAnimation("star-up-load") 
 			_:

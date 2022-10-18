@@ -6,7 +6,7 @@ func playAnimation(animationName: String) -> void:
 	match animationName:
 		"star-up-loading":
 			z_index = 1
-			position.x = -11
+			position.x = -15
 			position.y = -39
 		
 	play(animationName)

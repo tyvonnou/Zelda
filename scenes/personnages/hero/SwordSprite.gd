@@ -19,8 +19,11 @@ func playAnimation(animationName: String) -> void:
 			position.x = -2
 			position.y = 4
 		"sword-up-release":
-			z_index = 0
-			position.x = -11
+			if !flip_v:
+				z_index = 0
+			else:
+				z_index = 1
+			position.x = 8
 			position.y = -12
 		"load-sword-up":
 			z_index = 0

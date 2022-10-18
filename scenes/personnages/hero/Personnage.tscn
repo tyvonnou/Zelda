@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=2]
+[gd_scene load_steps=153 format=2]
 
 [ext_resource path="res://assets/character/hero/walking.tunic.png" type="Texture" id=1]
 [ext_resource path="res://assets/audio/sword/sword1.ogg" type="AudioStream" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/character/hero/spin_attack.sword4.png" type="Texture" id=11]
 [ext_resource path="res://scenes/personnages/hero/SwordSprite.gd" type="Script" id=12]
 [ext_resource path="res://scenes/personnages/hero/StarSprite.gd" type="Script" id=13]
+[ext_resource path="res://assets/character/hero/loading.sword_stars1.png" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=41]
 atlas = ExtResource( 1 )
@@ -169,6 +170,22 @@ region = Rect2( 320, 96, 32, 32 )
 atlas = ExtResource( 5 )
 region = Rect2( 352, 96, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=195]
+atlas = ExtResource( 11 )
+region = Rect2( 96, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=194]
+atlas = ExtResource( 11 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=197]
+atlas = ExtResource( 11 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=196]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 24, 24 )
+
 [sub_resource type="AtlasTexture" id=47]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 32, 32 )
@@ -237,21 +254,9 @@ region = Rect2( 320, 32, 32, 32 )
 atlas = ExtResource( 5 )
 region = Rect2( 352, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=197]
-atlas = ExtResource( 11 )
-region = Rect2( 24, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=196]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=195]
-atlas = ExtResource( 11 )
-region = Rect2( 96, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=194]
-atlas = ExtResource( 11 )
-region = Rect2( 72, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id=198]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 24, 24, 24 )
 
 [sub_resource type="AtlasTexture" id=193]
 atlas = ExtResource( 11 )
@@ -289,6 +294,16 @@ animations = [ {
 "name": "sword-down",
 "speed": 12.0
 }, {
+"frames": [ SubResource( 87 ) ],
+"loop": true,
+"name": "sword-down-load",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 195 ), SubResource( 194 ), SubResource( 197 ), SubResource( 196 ), SubResource( 195 ) ],
+"loop": true,
+"name": "sword-down-release",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 10 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 91 ), SubResource( 97 ), SubResource( 98 ), SubResource( 97 ) ],
 "loop": false,
 "name": "sword-right",
@@ -299,12 +314,12 @@ animations = [ {
 "name": "sword-up",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 71 ) ],
+"frames": [ SubResource( 198 ) ],
 "loop": true,
 "name": "sword-up-load",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 197 ), SubResource( 196 ), SubResource( 195 ), SubResource( 194 ), SubResource( 193 ) ],
+"frames": [ SubResource( 197 ), SubResource( 194 ), SubResource( 195 ), SubResource( 196 ), SubResource( 193 ) ],
 "loop": true,
 "name": "sword-up-release",
 "speed": 5.0
@@ -494,6 +509,11 @@ animations = [ {
 "name": "sword-down",
 "speed": 12.0
 }, {
+"frames": [  ],
+"loop": true,
+"name": "sword-down-release",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 120 ), SubResource( 121 ), SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ) ],
 "loop": true,
 "name": "sword-right",
@@ -507,7 +527,7 @@ animations = [ {
 "frames": [ SubResource( 177 ), SubResource( 178 ), SubResource( 179 ), SubResource( 180 ), SubResource( 181 ), SubResource( 182 ), SubResource( 183 ), SubResource( 184 ), SubResource( 185 ), SubResource( 186 ), SubResource( 187 ), SubResource( 188 ), SubResource( 189 ), SubResource( 190 ), SubResource( 191 ) ],
 "loop": true,
 "name": "sword-up-release",
-"speed": 12.0
+"speed": 13.0
 } ]
 
 [sub_resource type="AtlasTexture" id=171]
@@ -652,7 +672,7 @@ position = Vector2( -5, -15 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 9 )
-animation = "sword-up-release"
+animation = "sword-down-load"
 speed_scale = 2.5
 
 [node name="SwordBody" type="KinematicBody2D" parent="HeroBody"]
@@ -662,7 +682,7 @@ script = ExtResource( 8 )
 position = Vector2( -2, 3 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
-animation = "sword-up-release"
+animation = "sword-down-release"
 speed_scale = 2.5
 script = ExtResource( 12 )
 
