@@ -34,13 +34,9 @@ func _process(_delta: float) -> void:
 		match personnage.SPRITE_MAP[personnage.look_direction]:
 			"mv-right":
 				$HeroSprite.play("sword-right")
-			"mv-up":
+			"mv-up", "mv-up-right":
 				$HeroSprite.play("sword-up")
-			"mv-up-right":
-				$HeroSprite.play("sword-up")
-			"mv-down":
-				$HeroSprite.play("sword-down")
-			"mv-bottom-right":
+			"mv-down", "mv-bottom-right":
 				$HeroSprite.play("sword-down")
 
 	if Input.is_action_just_released("ui_accept") && personnage.swordLoad:
@@ -50,7 +46,7 @@ func _on_Hero_animation_finished():
 	if Input.is_action_pressed("ui_accept"):
 		match $SwordBody/SwordSprite.get_animation():
 			"sword-up":
-				$HeroSprite.play("load-sword-up")     
+				$HeroSprite.play("sword-up-load")     
 
 	else:
 		get_tree().get_root().set_disable_input(false)
