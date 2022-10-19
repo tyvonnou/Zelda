@@ -51,7 +51,7 @@ func _process(_delta):
 		if personnage.swordLoad:
 			$SwordSprite.playAnimation("sword-up-release")
 			personnage.swordLoad = false
-		else:
+		elif $StarSprite.playing:
 			stopAnimation($SwordSprite)
 		stopAnimation($StarSprite)
 
@@ -72,6 +72,7 @@ func _on_Sword_animation_finished():
 				$SwordSprite.playAnimation("sword-up-release")
 				$SwordSprite.stop()
 				$SwordSprite.frame = 0
+				$StarSprite.flip_v = true 
 				$StarSprite.playAnimation("star-up-loading")
 			_:
 				if !$SwordSprite.get_animation().begins_with("load"):
@@ -84,7 +85,11 @@ func _on_Star_animation_finished():
 		match $SwordSprite.get_animation():
 			"sword-up-release":
 				personnage.swordLoad = true
-				$StarSprite.playAnimation("star-up-load") 
+				if !$SwordSprite.flip_v:
+					$StarSprite.playAnimation("star-up-load") 
+				else:
+					$StarSprite.flip_v = true
+					$StarSprite.playAnimation("star-up-load") 
 			_:
 				if !$SwordSprite.get_animation().begins_with("load"):
 					stopAnimation($SwordSprite) 

@@ -8,7 +8,10 @@ func playAnimation(animationName: String) -> void:
 			z_index = 1
 			position.x = -15
 			position.y = -39
-		
+		"star-down-loading":
+			z_index = 1
+			position.x = -15
+			position.y = -20
 	play(animationName)
 	
 func _ready():
