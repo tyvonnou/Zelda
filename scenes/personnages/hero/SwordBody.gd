@@ -26,9 +26,7 @@ func _process(_delta):
 	
 	if (input_vector.length() > 0.0):
 		cleanShape()
-		if (!$StarSprite.playing):
-			$SwordSprite.flip_h = sign(personnage.look_direction.x) == -1.0
-			$StarSprite.flip_h = sign(personnage.look_direction.x) == -1.0
+		$SwordSprite.flip_h = sign(personnage.look_direction.x) == -1.0
 	# Sword action 
 	if (Input.is_action_just_pressed("ui_accept") && equippedSword):
 		get_tree().get_root().set_disable_input(true)
@@ -51,46 +49,17 @@ func _process(_delta):
 		if personnage.swordLoad:
 			$SwordSprite.playAnimation("sword-up-release")
 			personnage.swordLoad = false
-		elif $StarSprite.playing:
-			stopAnimation($SwordSprite)
-		stopAnimation($StarSprite)
+
 
 		
 func _on_Sword_animation_finished():
 	if Input.is_action_pressed("ui_accept"):
 		match $SwordSprite.get_animation():
 			"sword-up":
-				$SwordSprite.flip_h = true 
-				$SwordSprite.flip_v = false 
-				$SwordSprite.playAnimation("sword-up-release")
-				$SwordSprite.stop()
-				$SwordSprite.frame = 0
-				$StarSprite.playAnimation("star-up-loading")
-			"sword-down":
-				$SwordSprite.flip_h = true 
-				$SwordSprite.flip_v = true 
-				$SwordSprite.playAnimation("sword-up-release")
-				$SwordSprite.stop()
-				$SwordSprite.frame = 0
-				$StarSprite.flip_v = true 
-				$StarSprite.playAnimation("star-up-loading")
-			_:
-				if !$SwordSprite.get_animation().begins_with("load"):
-					stopAnimation($SwordSprite)
+				$SwordSprite.playAnimation("sword-up-loading")
+			"sword-up-loading":
+				$SwordSprite.playAnimation("sword-up-load")
 	else:
-		stopAnimation($SwordSprite)       
-
-func _on_Star_animation_finished():
-	if Input.is_action_pressed("ui_accept"):
-		match $SwordSprite.get_animation():
-			"sword-up-release":
-				personnage.swordLoad = true
-				if !$SwordSprite.flip_v:
-					$StarSprite.playAnimation("star-up-load") 
-				else:
-					$StarSprite.flip_v = true
-					$StarSprite.playAnimation("star-up-load") 
-			_:
-				if !$SwordSprite.get_animation().begins_with("load"):
-					stopAnimation($SwordSprite) 
+		stopAnimation($SwordSprite)
+	
 

@@ -6,10 +6,10 @@ const SPRITE_MAP := {
 	Vector2.DOWN: "mv-down",
 	Vector2.LEFT: "mv-right",
 	Vector2.UP: "mv-up",
-	Vector2(1.0,-1.0): "mv-up-right",
-	Vector2(-1.0,-1.0): "mv-up-right",
-	Vector2(1.0,1.0): "mv-bottom-right",
-	Vector2(-1.0,1.0): "mv-bottom-right",
+	Vector2(1.0,-1.0): "mv-up",
+	Vector2(-1.0,-1.0): "mv-up",
+	Vector2(1.0,1.0): "mv-down",
+	Vector2(-1.0,1.0): "mv-down",
 }
 
 # Owned item
