@@ -49,6 +49,8 @@ func _process(_delta):
 		if personnage.swordLoad:
 			$SwordSprite.playAnimation("sword-up-release")
 			personnage.swordLoad = false
+		elif $SwordSprite.get_animation().ends_with("load") || $SwordSprite.get_animation().ends_with("loading"):
+			stopAnimation($SwordSprite)
 
 
 		
@@ -59,6 +61,14 @@ func _on_Sword_animation_finished():
 				$SwordSprite.playAnimation("sword-up-loading")
 			"sword-up-loading":
 				$SwordSprite.playAnimation("sword-up-load")
+			"sword-right":
+				$SwordSprite.playAnimation("sword-right-loading")
+			"sword-right-loading":
+				$SwordSprite.playAnimation("sword-right-load")
+			"sword-down":
+				$SwordSprite.playAnimation("sword-down-loading")
+			"sword-down-loading":
+				$SwordSprite.playAnimation("sword-down-load")
 	else:
 		stopAnimation($SwordSprite)
 	

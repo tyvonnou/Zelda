@@ -15,14 +15,13 @@ func _process(_delta: float) -> void:
 	)
 
 	# Play movements and update look direction
-	if (input_vector.length() > 0.0):
+	if (input_vector.length() > 0.0 && !$HeroSprite.playing):
 			if !lockLookPosition:
 				personnage.look_direction = input_vector
 			# Flip H
 			$HeroSprite.flip_h = sign(personnage.look_direction.x) == -1.0
 			# Basic movement 
 			if get_parent().SPRITE_MAP[personnage.look_direction].begins_with("mv-") && !$HeroSprite.playing:
-				
 				$HeroSprite.play(get_parent().SPRITE_MAP[personnage.look_direction])
 				if !lockLookPosition:
 					$SwordBody.stopAnimation($SwordBody/SwordSprite)
@@ -60,12 +59,6 @@ func _on_Hero_animation_finished():
 		match $HeroSprite.get_animation():
 			"sword-up", "sword-down", "sword-right":
 				lockLookPosition = true
-				print(personnage.look_direction)
-			"sword-down-load":
-				$HeroSprite.play("sword-down-release")
-		match $HeroSprite.get_animation():
-			"sword-up-release":
-				$HeroSprite.play("mv-up") 
 				
 	get_tree().get_root().set_disable_input(false)
 	$HeroSprite.stop()

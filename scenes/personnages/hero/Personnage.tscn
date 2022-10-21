@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://assets/character/hero/mv-down/2.png" type="Texture" id=1]
 [ext_resource path="res://assets/audio/sword/sword1.ogg" type="AudioStream" id=2]
@@ -32,111 +32,13 @@
 [ext_resource path="res://assets/character/hero/sword-up/2.png" type="Texture" id=30]
 [ext_resource path="res://assets/character/item/sword/sword-load-up/1.png" type="Texture" id=31]
 [ext_resource path="res://assets/character/item/sword/sword-load-up/2.png" type="Texture" id=32]
-
-[sub_resource type="AtlasTexture" id=87]
-region = Rect2( 96, 96, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=199]
-region = Rect2( 0, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=200]
-region = Rect2( 24, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=201]
-region = Rect2( 48, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=202]
-region = Rect2( 72, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=203]
-region = Rect2( 96, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=204]
-region = Rect2( 120, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=205]
-region = Rect2( 144, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=206]
-region = Rect2( 168, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=207]
-region = Rect2( 192, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=208]
-region = Rect2( 216, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=209]
-region = Rect2( 240, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=210]
-region = Rect2( 264, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=211]
-region = Rect2( 288, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=212]
-region = Rect2( 312, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=213]
-region = Rect2( 336, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=225]
-region = Rect2( 0, 24, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=226]
-region = Rect2( 24, 24, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=227]
-region = Rect2( 48, 24, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=228]
-region = Rect2( 72, 24, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=229]
-region = Rect2( 96, 24, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=230]
-region = Rect2( 120, 24, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=198]
-region = Rect2( 0, 24, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=221]
-region = Rect2( 168, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=222]
-region = Rect2( 192, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=219]
-region = Rect2( 120, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=216]
-region = Rect2( 48, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=215]
-region = Rect2( 24, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=224]
-region = Rect2( 240, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=223]
-region = Rect2( 216, 0, 24, 24 )
-
-[sub_resource type="StreamTexture" id=26]
-load_path = "res://.import/walking.tunic.png-4f81e930e257b75d784f8c7ea85f4d0a.stex"
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = SubResource( 26 )
-region = Rect2( 0, 32, 24, 32 )
+[ext_resource path="res://assets/character/item/sword/sword-load-right/1.png" type="Texture" id=33]
+[ext_resource path="res://assets/character/item/sword/sword-load-right/2.png" type="Texture" id=34]
+[ext_resource path="res://assets/character/item/sword/sword-load-down/1.png" type="Texture" id=35]
+[ext_resource path="res://assets/character/item/sword/sword-load-down/2.png" type="Texture" id=36]
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "mv-bottom-right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 10 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "mv-down",
@@ -152,25 +54,10 @@ animations = [ {
 "name": "mv-up",
 "speed": 5.0
 }, {
-"frames": [  ],
-"loop": true,
-"name": "mv-up-right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 10 ), ExtResource( 13 ), ExtResource( 22 ), ExtResource( 23 ) ],
 "loop": false,
 "name": "sword-down",
 "speed": 12.0
-}, {
-"frames": [ SubResource( 87 ) ],
-"loop": true,
-"name": "sword-down-load",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 199 ), SubResource( 200 ), SubResource( 201 ), SubResource( 202 ), SubResource( 203 ), SubResource( 204 ), SubResource( 205 ), SubResource( 206 ), SubResource( 207 ), SubResource( 208 ), SubResource( 209 ), SubResource( 210 ), SubResource( 211 ), SubResource( 212 ), SubResource( 213 ) ],
-"loop": true,
-"name": "sword-down-release",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 15 ) ],
 "loop": false,
@@ -181,16 +68,6 @@ animations = [ {
 "loop": true,
 "name": "sword-up",
 "speed": 12.0
-}, {
-"frames": [ SubResource( 225 ), SubResource( 226 ), SubResource( 227 ), SubResource( 228 ), SubResource( 229 ), SubResource( 230 ) ],
-"loop": true,
-"name": "sword-up-load",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 198 ), SubResource( 221 ), SubResource( 222 ), SubResource( 219 ), SubResource( 219 ), SubResource( 216 ), SubResource( 215 ), SubResource( 224 ), SubResource( 223 ), SubResource( 18 ) ],
-"loop": true,
-"name": "sword-up-release",
-"speed": 10.0
 } ]
 
 [sub_resource type="SpriteFrames" id=63]
@@ -199,6 +76,16 @@ animations = [ {
 "loop": false,
 "name": "sword-down",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 36 ) ],
+"loop": true,
+"name": "sword-down-load",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 35 ), ExtResource( 35 ) ],
+"loop": true,
+"name": "sword-down-loading",
+"speed": 3.0
 }, {
 "frames": [  ],
 "loop": false,
@@ -209,6 +96,16 @@ animations = [ {
 "loop": false,
 "name": "sword-right",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 33 ), ExtResource( 34 ) ],
+"loop": true,
+"name": "sword-right-load",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 33 ), ExtResource( 33 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "sword-right-loading",
+"speed": 3.0
 }, {
 "frames": [ null, ExtResource( 26 ), ExtResource( 28 ), ExtResource( 29 ) ],
 "loop": false,
@@ -244,21 +141,20 @@ script = ExtResource( 3 )
 script = ExtResource( 9 )
 
 [node name="HeroSprite" type="AnimatedSprite" parent="HeroBody"]
-position = Vector2( -5, -15 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 9 )
-animation = "mv-up"
+animation = "mv-down"
 speed_scale = 1.5
 
 [node name="SwordBody" type="KinematicBody2D" parent="HeroBody"]
 script = ExtResource( 8 )
 
 [node name="SwordSprite" type="AnimatedSprite" parent="HeroBody/SwordBody"]
-position = Vector2( -13, -38 )
+position = Vector2( 5, 28 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
-animation = "sword-up-loading"
+animation = "sword-down-load"
 speed_scale = 1.5
 script = ExtResource( 12 )
 
@@ -266,26 +162,31 @@ script = ExtResource( 12 )
 stream = ExtResource( 2 )
 
 [node name="RightShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
-position = Vector2( 23.25, -8.5 )
+visible = false
+position = Vector2( 21, -8 )
 shape = SubResource( 65 )
 disabled = true
 
 [node name="DownShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+visible = false
 position = Vector2( 1, 14 )
 shape = SubResource( 65 )
 disabled = true
 
 [node name="UpShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+visible = false
 position = Vector2( 2, -28.5 )
 shape = SubResource( 65 )
 disabled = true
 
 [node name="LeftShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+visible = false
 position = Vector2( -23, -9 )
 shape = SubResource( 65 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeroBody"]
+visible = false
 position = Vector2( 1, -3 )
 shape = SubResource( 64 )
 
