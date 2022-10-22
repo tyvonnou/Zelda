@@ -58,7 +58,7 @@ func _process(_delta: float) -> void:
 		if personnage.swordLoad:
 			flip_h = $HeroSprite.flip_h
 			$HeroSprite.flip_h = false
-
+			get_tree().get_root().set_disable_input(true)
 			match personnage.SPRITE_MAP[personnage.look_direction]:
 				"mv-right":
 					if !flip_h:

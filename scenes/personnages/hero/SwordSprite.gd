@@ -1,6 +1,10 @@
 extends AnimatedSprite
 
+var audio_stream := []
 
+func rand_pick(array: Array):
+	return array[randi() % len(array)]
+	
 func playAnimation(animationName: String) -> void:
 		
 	visible = true
@@ -50,8 +54,93 @@ func playAnimation(animationName: String) -> void:
 			position.y = 28
 
 	if (!playing && animationName.begins_with("sword-")):
+		$SwordSound.stream = rand_pick(audio_stream)
+		$SwordSound.play()
+	elif (animationName.ends_with("load") ):
+		$SwordSound.stream = preload("res://assets/audio/sword/Oracle_Sword_Charge.wav")
+		$SwordSound.play()
+	elif (animationName.begins_with("spin-")):
+		$SwordSound.stream = preload("res://assets/audio/sword/Oracle_Sword_Spin.wav")
 		$SwordSound.play()
 	play(animationName)
 	
-func _ready():
-	pass 
+func _init() -> void:
+	audio_stream.append(preload("res://assets/audio/sword/Oracle_Sword_Slash1.wav"))
+	audio_stream.append(preload("res://assets/audio/sword/Oracle_Sword_Slash2.wav"))
+	audio_stream.append(preload("res://assets/audio/sword/Oracle_Sword_Slash3.wav"))
+	
+	
+func _process(_delta):
+	match get_animation():
+		"spin-up":
+			match frame:
+				0,1:
+					z_index = 0
+					position.x = -15
+					position.y = -15
+				2,3:
+					z_index = 1
+					position.x = -15
+					position.y = 15
+				4,5:
+					z_index = 1
+					position.x = 15
+					position.y = 15
+				6,7:
+					z_index = 0
+					position.x = 15
+					position.y = -15
+		"spin-down":
+			match frame:
+				0,1:
+					z_index = 1
+					position.x = 15
+					position.y = 15
+				2,3:
+					z_index = 0
+					position.x = 15
+					position.y = -15
+				4,5:
+					z_index = 0
+					position.x = -15
+					position.y = -15
+				6,7:
+					z_index = 0
+					position.x = -15
+					position.y = 15
+		"spin-right":
+			match frame:
+				0,1:
+					z_index = 0
+					position.x = 15
+					position.y = -15
+				2,3:
+					z_index = 0
+					position.x = -15
+					position.y = -15
+				4,5:
+					z_index = 0
+					position.x = -15
+					position.y = 15
+				6,7:
+					z_index = 0
+					position.x = 15
+					position.y = 15
+		"spin-left":
+			match frame:
+				0,1:
+					z_index = 1
+					position.x = -15
+					position.y = 15
+				2,3:
+					z_index = 0
+					position.x = 15
+					position.y = 15
+				4,5:
+					z_index = 0
+					position.x = 15
+					position.y = -15
+				6,7:
+					z_index = 0
+					position.x = -15
+					position.y = -15

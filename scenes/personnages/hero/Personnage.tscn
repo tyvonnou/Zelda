@@ -1,7 +1,6 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://assets/character/hero/mv-down/2.png" type="Texture" id=1]
-[ext_resource path="res://assets/audio/sword/sword1.ogg" type="AudioStream" id=2]
 [ext_resource path="res://scenes/personnages/hero/Personnage.gd" type="Script" id=3]
 [ext_resource path="res://assets/character/hero/sword-up/1.png" type="Texture" id=4]
 [ext_resource path="res://assets/character/hero/mv-up/1.png" type="Texture" id=5]
@@ -44,6 +43,14 @@
 [ext_resource path="res://assets/character/hero/spin/2.png" type="Texture" id=42]
 [ext_resource path="res://assets/character/hero/spin/7.png" type="Texture" id=43]
 [ext_resource path="res://assets/character/hero/spin/8.png" type="Texture" id=44]
+[ext_resource path="res://assets/character/item/sword/spin/6.png" type="Texture" id=45]
+[ext_resource path="res://assets/character/item/sword/spin/5.png" type="Texture" id=46]
+[ext_resource path="res://assets/character/item/sword/spin/3.png" type="Texture" id=47]
+[ext_resource path="res://assets/character/item/sword/spin/7.png" type="Texture" id=48]
+[ext_resource path="res://assets/character/item/sword/spin/2.png" type="Texture" id=49]
+[ext_resource path="res://assets/character/item/sword/spin/4.png" type="Texture" id=50]
+[ext_resource path="res://assets/character/item/sword/spin/8.png" type="Texture" id=51]
+[ext_resource path="res://assets/character/item/sword/spin/1.png" type="Texture" id=52]
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
@@ -62,25 +69,25 @@ animations = [ {
 "name": "mv-up",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ) ],
+"frames": [ ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ) ],
 "loop": true,
 "name": "spin-down",
-"speed": 5.0
+"speed": 20.0
 }, {
-"frames": [ ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ) ],
+"frames": [ ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ) ],
 "loop": true,
 "name": "spin-left",
-"speed": 5.0
+"speed": 20.0
 }, {
-"frames": [ ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ) ],
+"frames": [ ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ) ],
 "loop": true,
 "name": "spin-right",
-"speed": 5.0
+"speed": 20.0
 }, {
-"frames": [ ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ) ],
+"frames": [ ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ) ],
 "loop": true,
 "name": "spin-up",
-"speed": 5.0
+"speed": 25.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 13 ), ExtResource( 22 ), ExtResource( 23 ) ],
 "loop": false,
@@ -100,6 +107,26 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=63]
 animations = [ {
+"frames": [ ExtResource( 46 ), ExtResource( 45 ), ExtResource( 48 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 50 ) ],
+"loop": true,
+"name": "spin-down",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 47 ), ExtResource( 50 ), ExtResource( 46 ), ExtResource( 45 ), ExtResource( 48 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 49 ) ],
+"loop": true,
+"name": "spin-left",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 48 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 46 ), ExtResource( 45 ) ],
+"loop": true,
+"name": "spin-right",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 52 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 46 ), ExtResource( 45 ), ExtResource( 48 ), ExtResource( 51 ) ],
+"loop": true,
+"name": "spin-up",
+"speed": 15.0
+}, {
 "frames": [ null, ExtResource( 25 ), ExtResource( 24 ), ExtResource( 21 ) ],
 "loop": false,
 "name": "sword-down",
@@ -114,11 +141,6 @@ animations = [ {
 "loop": true,
 "name": "sword-down-loading",
 "speed": 3.0
-}, {
-"frames": [  ],
-"loop": false,
-"name": "sword-down-release",
-"speed": 5.0
 }, {
 "frames": [ null, ExtResource( 18 ), ExtResource( 20 ), ExtResource( 19 ) ],
 "loop": false,
@@ -149,11 +171,6 @@ animations = [ {
 "loop": false,
 "name": "sword-up-loading",
 "speed": 3.0
-}, {
-"frames": [  ],
-"loop": false,
-"name": "sword-up-release",
-"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=65]
@@ -172,22 +189,22 @@ script = ExtResource( 9 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 9 )
-animation = "spin-down"
+animation = "mv-down"
 speed_scale = 1.5
 
 [node name="SwordBody" type="KinematicBody2D" parent="HeroBody"]
 script = ExtResource( 8 )
 
 [node name="SwordSprite" type="AnimatedSprite" parent="HeroBody/SwordBody"]
+visible = false
 position = Vector2( 5, 28 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 63 )
-animation = "sword-down-load"
+animation = "sword-down"
 speed_scale = 1.5
 script = ExtResource( 12 )
 
 [node name="SwordSound" type="AudioStreamPlayer" parent="HeroBody/SwordBody/SwordSprite"]
-stream = ExtResource( 2 )
 
 [node name="RightShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
 visible = false
@@ -222,7 +239,6 @@ shape = SubResource( 64 )
 current = true
 
 [node name="Transition" parent="." instance=ExtResource( 6 )]
-visible = false
 
 [connection signal="animation_finished" from="HeroBody/HeroSprite" to="HeroBody" method="_on_Hero_animation_finished"]
 [connection signal="animation_finished" from="HeroBody/SwordBody/SwordSprite" to="HeroBody/SwordBody" method="_on_Sword_animation_finished"]
