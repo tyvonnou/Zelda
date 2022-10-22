@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://assets/character/hero/mv-down/2.png" type="Texture" id=1]
 [ext_resource path="res://assets/audio/sword/sword1.ogg" type="AudioStream" id=2]
@@ -36,6 +36,14 @@
 [ext_resource path="res://assets/character/item/sword/sword-load-right/2.png" type="Texture" id=34]
 [ext_resource path="res://assets/character/item/sword/sword-load-down/1.png" type="Texture" id=35]
 [ext_resource path="res://assets/character/item/sword/sword-load-down/2.png" type="Texture" id=36]
+[ext_resource path="res://assets/character/hero/spin/4.png" type="Texture" id=37]
+[ext_resource path="res://assets/character/hero/spin/5.png" type="Texture" id=38]
+[ext_resource path="res://assets/character/hero/spin/3.png" type="Texture" id=39]
+[ext_resource path="res://assets/character/hero/spin/6.png" type="Texture" id=40]
+[ext_resource path="res://assets/character/hero/spin/1.png" type="Texture" id=41]
+[ext_resource path="res://assets/character/hero/spin/2.png" type="Texture" id=42]
+[ext_resource path="res://assets/character/hero/spin/7.png" type="Texture" id=43]
+[ext_resource path="res://assets/character/hero/spin/8.png" type="Texture" id=44]
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
@@ -52,6 +60,26 @@ animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "mv-up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ) ],
+"loop": true,
+"name": "spin-down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ) ],
+"loop": true,
+"name": "spin-left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ) ],
+"loop": true,
+"name": "spin-right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 43 ) ],
+"loop": true,
+"name": "spin-up",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 13 ), ExtResource( 22 ), ExtResource( 23 ) ],
@@ -144,7 +172,7 @@ script = ExtResource( 9 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 9 )
-animation = "mv-down"
+animation = "spin-down"
 speed_scale = 1.5
 
 [node name="SwordBody" type="KinematicBody2D" parent="HeroBody"]

@@ -47,7 +47,7 @@ func _process(_delta):
 	# Stop attack
 	if Input.is_action_just_released("ui_accept"):
 		if personnage.swordLoad:
-			$SwordSprite.playAnimation("sword-up-release")
+			#$SwordSprite.playAnimation("sword-up-release")
 			personnage.swordLoad = false
 		elif $SwordSprite.get_animation().ends_with("load") || $SwordSprite.get_animation().ends_with("loading"):
 			stopAnimation($SwordSprite)
@@ -60,14 +60,17 @@ func _on_Sword_animation_finished():
 			"sword-up":
 				$SwordSprite.playAnimation("sword-up-loading")
 			"sword-up-loading":
+				personnage.swordLoad = true
 				$SwordSprite.playAnimation("sword-up-load")
 			"sword-right":
 				$SwordSprite.playAnimation("sword-right-loading")
 			"sword-right-loading":
+				personnage.swordLoad = true
 				$SwordSprite.playAnimation("sword-right-load")
 			"sword-down":
 				$SwordSprite.playAnimation("sword-down-loading")
 			"sword-down-loading":
+				personnage.swordLoad = true
 				$SwordSprite.playAnimation("sword-down-load")
 	else:
 		stopAnimation($SwordSprite)
