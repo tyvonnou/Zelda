@@ -1,10 +1,9 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://assets/character/hero/mv-down/2.png" type="Texture" id=1]
 [ext_resource path="res://scenes/personnages/hero/Personnage.gd" type="Script" id=3]
 [ext_resource path="res://assets/character/hero/sword-up/1.png" type="Texture" id=4]
 [ext_resource path="res://assets/character/hero/mv-up/1.png" type="Texture" id=5]
-[ext_resource path="res://scenes/transition/Transition.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/character/hero/mv-up/2.png" type="Texture" id=7]
 [ext_resource path="res://scenes/personnages/hero/SwordBody.gd" type="Script" id=8]
 [ext_resource path="res://scenes/personnages/hero/HeroBody.gd" type="Script" id=9]
@@ -237,8 +236,6 @@ shape = SubResource( 64 )
 
 [node name="Camera2D" type="Camera2D" parent="HeroBody"]
 current = true
-
-[node name="Transition" parent="." instance=ExtResource( 6 )]
 
 [connection signal="animation_finished" from="HeroBody/HeroSprite" to="HeroBody" method="_on_Hero_animation_finished"]
 [connection signal="animation_finished" from="HeroBody/SwordBody/SwordSprite" to="HeroBody/SwordBody" method="_on_Sword_animation_finished"]

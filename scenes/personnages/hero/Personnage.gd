@@ -14,7 +14,7 @@ const SPRITE_MAP := {
 
 # Owned item
 export var inventory := {
-	"sword": true,
+	"sword": false,
 }
 
 # Equipment key -> item
