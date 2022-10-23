@@ -28,9 +28,7 @@ func _process(_delta: float) -> void:
 				$HeroSprite.play(get_parent().SPRITE_MAP[personnage.look_direction])
 				if !lockLookPosition:
 					$SwordBody.stopAnimation($SwordBody/SwordSprite)
-			# Load sword movement 
-			if get_parent().SPRITE_MAP[personnage.look_direction].begins_with("mv-") && !$HeroSprite.playing:
-				$HeroSprite.playing = true
+			
 	
 	# Stop movement
 	if (Input.is_action_just_released("ui_right") || 
