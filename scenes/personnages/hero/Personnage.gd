@@ -36,5 +36,6 @@ func _physics_process(_delta) -> void:
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	)
+	print(input_vector)
 	var move_direction := input_vector.normalized()
 	var _err = $HeroBody.move_and_slide(speed * move_direction)

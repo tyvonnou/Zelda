@@ -1,13 +1,13 @@
 extends AnimatedSprite
 
 var audio_stream := []
-
 func rand_pick(array: Array):
 	return array[randi() % len(array)]
 	
 func playAnimation(animationName: String) -> void:
 		
 	visible = true
+
 	match animationName:
 		"sword-right":
 			if !flip_h:
@@ -72,21 +72,80 @@ func _init() -> void:
 	
 func _process(_delta):
 	match get_animation():
+		"sword-down":
+			match frame:
+				1:
+					get_parent().get_node("DownShape").disabled = false 
+				2:
+					get_parent().get_node("DownShape").disabled = true
+					get_parent().get_node("DownShape2").disabled = false
+				3:
+					get_parent().get_node("DownShape2").disabled = true
+					get_parent().get_node("DownShape3").disabled = false
+		"sword-up":
+			match frame:
+				1:
+					get_parent().get_node("UpShape").disabled = false 
+				2:
+					get_parent().get_node("UpShape").disabled = true
+					get_parent().get_node("UpShape2").disabled = false
+				3:
+					get_parent().get_node("UpShape2").disabled = true
+					get_parent().get_node("UpShape3").disabled = false
+		"sword-right":
+			if !flip_h:
+				match frame:
+					1:
+						get_parent().get_node("RightShape").disabled = false 
+					2:
+						get_parent().get_node("RightShape").disabled = true
+						get_parent().get_node("RightShape2").disabled = false
+					3:
+						get_parent().get_node("RightShape2").disabled = true
+						get_parent().get_node("RightShape3").disabled = false
+			else:
+				match frame:
+					1:
+						get_parent().get_node("LeftShape").disabled = false 
+					2:
+						get_parent().get_node("LeftShape").disabled = true
+						get_parent().get_node("LeftShape2").disabled = false
+					3:
+						get_parent().get_node("LeftShape2").disabled = true
+						get_parent().get_node("LeftShape3").disabled = false
+			
 		"spin-up":
 			match frame:
 				0,1:
+					get_parent().get_node("LeftShape").disabled = false 
+					get_parent().get_node("LeftShape2").disabled = false
 					z_index = 0
 					position.x = -15
 					position.y = -15
 				2,3:
+					get_parent().get_node("LeftShape").disabled = true
+					get_parent().get_node("LeftShape2").disabled = true
+					get_parent().get_node("DownShape").disabled = false 
+					get_parent().get_node("DownShape2").disabled = false
 					z_index = 1
 					position.x = -15
 					position.y = 15
 				4,5:
+					get_parent().get_node("DownShape").disabled = true 
+					get_parent().get_node("DownShape2").disabled = true
+					get_parent().get_node("DownShape3").disabled = false 
+					get_parent().get_node("DownShape4").disabled = false
+					get_parent().get_node("RightShape3").disabled = false
 					z_index = 1
 					position.x = 15
 					position.y = 15
 				6,7:
+					get_parent().get_node("DownShape3").disabled = true 
+					get_parent().get_node("DownShape4").disabled = true
+					get_parent().get_node("RightShape3").disabled = true
+					
+					get_parent().get_node("RightShape2").disabled = false
+					get_parent().get_node("UpShape2").disabled = false
 					z_index = 0
 					position.x = 15
 					position.y = -15

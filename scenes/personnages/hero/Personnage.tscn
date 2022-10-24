@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://assets/character/hero/mv-down/2.png" type="Texture" id=1]
 [ext_resource path="res://scenes/personnages/hero/Personnage.gd" type="Script" id=3]
@@ -104,6 +104,12 @@ animations = [ {
 "speed": 12.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=65]
+extents = Vector2( 12.5469, 4.34375 )
+
+[sub_resource type="RectangleShape2D" id=67]
+extents = Vector2( 19, 12 )
+
 [sub_resource type="SpriteFrames" id=63]
 animations = [ {
 "frames": [ ExtResource( 46 ), ExtResource( 45 ), ExtResource( 48 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 50 ) ],
@@ -172,11 +178,35 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=65]
-extents = Vector2( 12.75, 10.5 )
+[sub_resource type="RectangleShape2D" id=70]
+extents = Vector2( 8, 13 )
+
+[sub_resource type="RectangleShape2D" id=69]
+extents = Vector2( 11.5, 9 )
+
+[sub_resource type="RectangleShape2D" id=66]
+extents = Vector2( 4, 11.8835 )
+
+[sub_resource type="RectangleShape2D" id=68]
+extents = Vector2( 13, 18 )
+
+[sub_resource type="RectangleShape2D" id=71]
+extents = Vector2( 17, 12.5 )
+
+[sub_resource type="RectangleShape2D" id=72]
+extents = Vector2( 13.5, 10 )
+
+[sub_resource type="RectangleShape2D" id=73]
+extents = Vector2( 21.25, 13.5 )
+
+[sub_resource type="RectangleShape2D" id=74]
+extents = Vector2( 14, 8 )
+
+[sub_resource type="RectangleShape2D" id=75]
+extents = Vector2( 14, 14 )
 
 [sub_resource type="RectangleShape2D" id=64]
-extents = Vector2( 9.5, 9.5 )
+extents = Vector2( 9.5, 13.5 )
 
 [node name="Personnage" type="Node2D"]
 script = ExtResource( 3 )
@@ -194,6 +224,18 @@ speed_scale = 1.5
 [node name="SwordBody" type="KinematicBody2D" parent="HeroBody"]
 script = ExtResource( 8 )
 
+[node name="UpShape3" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( -8, -29 )
+rotation = 1.5708
+shape = SubResource( 65 )
+disabled = true
+
+[node name="DownShape2" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( -20, 28 )
+rotation = -3.14159
+shape = SubResource( 67 )
+disabled = true
+
 [node name="SwordSprite" type="AnimatedSprite" parent="HeroBody/SwordBody"]
 visible = false
 position = Vector2( 5, 28 )
@@ -205,33 +247,67 @@ script = ExtResource( 12 )
 
 [node name="SwordSound" type="AudioStreamPlayer" parent="HeroBody/SwordBody/SwordSprite"]
 
-[node name="RightShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
-visible = false
-position = Vector2( 21, -8 )
+[node name="RightShape3" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( 26, 8 )
 shape = SubResource( 65 )
 disabled = true
 
 [node name="DownShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
-visible = false
-position = Vector2( 1, 14 )
-shape = SubResource( 65 )
+position = Vector2( -28, 8 )
+rotation = 1.5708
+shape = SubResource( 70 )
 disabled = true
 
 [node name="UpShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
-visible = false
-position = Vector2( 2, -28.5 )
+position = Vector2( 25.5, -7 )
+shape = SubResource( 69 )
+disabled = true
+
+[node name="LeftShape3" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( -26, 8 )
 shape = SubResource( 65 )
+disabled = true
+
+[node name="DownShape3" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( 4.24586, 30.1165 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 66 )
+disabled = true
+
+[node name="UpShape2" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( 15, -29 )
+rotation = 1.5708
+shape = SubResource( 68 )
+disabled = true
+
+[node name="RightShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( 14, -29 )
+shape = SubResource( 71 )
+disabled = true
+
+[node name="RightShape2" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( 27.5, -7 )
+shape = SubResource( 72 )
 disabled = true
 
 [node name="LeftShape" type="CollisionShape2D" parent="HeroBody/SwordBody"]
-visible = false
-position = Vector2( -23, -9 )
-shape = SubResource( 65 )
+position = Vector2( -14.75, -29.5 )
+shape = SubResource( 73 )
+disabled = true
+
+[node name="LeftShape2" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( -26, -8 )
+shape = SubResource( 74 )
+disabled = true
+
+[node name="DownShape4" type="CollisionShape2D" parent="HeroBody/SwordBody"]
+position = Vector2( 25, 28 )
+rotation = -3.14159
+shape = SubResource( 75 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeroBody"]
-visible = false
-position = Vector2( 1, -3 )
+position = Vector2( 0, 1.5 )
 shape = SubResource( 64 )
 
 [node name="Camera2D" type="Camera2D" parent="HeroBody"]

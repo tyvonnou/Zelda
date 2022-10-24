@@ -1,55 +1,53 @@
 extends KinematicBody2D
 
 var personnage
-var lock_flip_h = false
 
 func cleanShape() -> void:
+	$RightShape3.disabled = true
+	$RightShape2.disabled = true
 	$RightShape.disabled = true
+	$LeftShape3.disabled = true
+	$LeftShape2.disabled = true
 	$LeftShape.disabled = true
+	$DownShape4.disabled = true
+	$DownShape3.disabled = true
+	$DownShape2.disabled = true
 	$DownShape.disabled = true
+	$UpShape3.disabled = true
+	$UpShape2.disabled = true
 	$UpShape.disabled = true
-
+	
 func stopAnimation(sprite: AnimatedSprite) -> void:
 	sprite.visible = false
-	sprite.frame = 0
+	sprite.stop() 
 	cleanShape()
 	get_tree().get_root().set_disable_input(false)
-	sprite.stop() 
+
+
 	
 func _process(_delta):
 	personnage = get_parent().get_parent()
 	var equippedSword = personnage.equipment["ui_accept"] == "sword"
 	# Movement 
-	var input_vector := Vector2(
-		float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")),
-		float(Input.is_action_pressed("ui_down")) - float(Input.is_action_pressed("ui_up"))
-	)
-	
-	if (input_vector.length() > 0.0 && !$SwordSprite.playing):
+
+	if (!$SwordSprite.playing):
 		cleanShape()
 		$SwordSprite.flip_h = sign(personnage.look_direction.x) == -1.0
 	# Sword action 
-	if (Input.is_action_just_pressed("ui_accept") && equippedSword):
-		get_tree().get_root().set_disable_input(true)
+	if (Input.is_action_just_pressed("ui_accept") && equippedSword)&& !$SwordSprite.playing:
 		match personnage.SPRITE_MAP[personnage.look_direction]:
 			"mv-right":
-				if !$SwordSprite.flip_h:
-					$RightShape.disabled = false
-				else:
-					$LeftShape.disabled = false
 				$SwordSprite.playAnimation("sword-right")
 			"mv-up", "mv-up-right":
-				$UpShape.disabled = false
 				$SwordSprite.playAnimation("sword-up")
 			"mv-down", "mv-bottom-right":
-				$DownShape.disabled = false
 				$SwordSprite.playAnimation("sword-down")
 	
 	
-	if Input.is_action_just_released("ui_accept"):
+	if Input.is_action_just_released("ui_accept") && $SwordSprite.playing:
 		# Spin attack
 		if personnage.swordLoad:
-			get_tree().get_root().set_disable_input(true)
+			personnage.swordLoad = false
 			match personnage.SPRITE_MAP[personnage.look_direction]:
 				"mv-up":
 					$SwordSprite.playAnimation("spin-up")
@@ -61,7 +59,6 @@ func _process(_delta):
 					else:
 						$SwordSprite.flip_h = false
 						$SwordSprite.playAnimation("spin-left")
-			personnage.swordLoad = false
 		# Unload
 		elif $SwordSprite.get_animation().ends_with("load") || $SwordSprite.get_animation().ends_with("loading"):
 			stopAnimation($SwordSprite)
@@ -91,6 +88,5 @@ func _on_Sword_animation_finished():
 	if ($SwordSprite.get_animation() == "spin-left"):
 		$SwordSprite.flip_h = true
 
-	get_tree().get_root().set_disable_input(false)
 	
 
