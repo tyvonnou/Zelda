@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var personnage
-
+var beRelease = true
 func cleanShape() -> void:
 	$RightShape3.disabled = true
 	$RightShape2.disabled = true
@@ -19,6 +19,7 @@ func cleanShape() -> void:
 	
 func stopAnimation(sprite: AnimatedSprite) -> void:
 	sprite.visible = false
+	sprite.frame = 0
 	sprite.stop() 
 	cleanShape()
 	get_tree().get_root().set_disable_input(false)
@@ -34,7 +35,8 @@ func _process(_delta):
 		cleanShape()
 		$SwordSprite.flip_h = sign(personnage.look_direction.x) == -1.0
 	# Sword action 
-	if (Input.is_action_just_pressed("ui_accept") && equippedSword)&& !$SwordSprite.playing:
+	if (Input.is_action_just_pressed("ui_accept") && equippedSword) && !$SwordSprite.playing:
+		beRelease = false
 		match personnage.SPRITE_MAP[personnage.look_direction]:
 			"mv-right":
 				$SwordSprite.playAnimation("sword-right")
@@ -44,7 +46,8 @@ func _process(_delta):
 				$SwordSprite.playAnimation("sword-down")
 	
 	
-	if Input.is_action_just_released("ui_accept") && $SwordSprite.playing:
+	if Input.is_action_just_released("ui_accept"):
+		beRelease = true
 		# Spin attack
 		if personnage.swordLoad:
 			personnage.swordLoad = false
@@ -66,7 +69,7 @@ func _process(_delta):
 
 		
 func _on_Sword_animation_finished():
-	if Input.is_action_pressed("ui_accept"):
+	if !beRelease:
 		match $SwordSprite.get_animation():
 			"sword-up":
 				$SwordSprite.playAnimation("sword-up-loading")

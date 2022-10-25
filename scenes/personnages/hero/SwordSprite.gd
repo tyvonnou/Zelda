@@ -116,7 +116,7 @@ func _process(_delta):
 			
 		"spin-up":
 			match frame:
-				0,1:
+				1:
 					get_parent().get_node("LeftShape").disabled = false 
 					get_parent().get_node("LeftShape2").disabled = false
 					z_index = 0
